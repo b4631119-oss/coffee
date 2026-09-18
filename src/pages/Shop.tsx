@@ -3,13 +3,14 @@ import { useApp } from '../context/AppContext';
 import { Link } from 'react-router-dom';
 import { Search, ShoppingBag, Heart, Star, Truck, Shield } from 'lucide-react';
 import { formatPrice } from '../utils/currency';
+import { t, getProductName, getProductDescription, getCategoryName } from '../utils/translations';
 
 export default function ShopPage() {
-  const { products, addToCart, addToWishlist, darkMode, searchQuery, setSearchQuery } = useApp();
+  const { products, addToCart, addToWishlist, darkMode, searchQuery, setSearchQuery, language } = useApp();
   const [activeCategory, setActiveCategory] = useState('All');
 
   const categories = ['All', 'Beans', 'Merchandise', 'Hot Drink', 'Cold Drink', 'Food'];
-  
+
   const shopProducts = products.filter(p => {
     const matchesCategory = activeCategory === 'All' || p.category === activeCategory;
     const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -23,16 +24,16 @@ export default function ShopPage() {
       <section className="relative py-16 lg:py-20 overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1447933601403-07fcbe16d735?w=1920&h=500&fit=crop"
+            src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=1920&h=500&fit=crop"
             alt="Coffee beans and merchandise"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-espresso/80"></div>
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="font-serif text-4xl lg:text-6xl font-bold text-cream mb-4">Online Shop</h1>
+          <h1 className="font-serif text-4xl lg:text-6xl font-bold text-cream mb-4">{t(language, 'shopTitle')}</h1>
           <p className="text-cream/70 text-lg max-w-2xl mx-auto">
-            Take the Coffeetoria experience home. Premium beans, artisan merchandise, and more — delivered to your door.
+            {t(language, 'shopDesc')}
           </p>
         </div>
       </section>
@@ -43,15 +44,15 @@ export default function ShopPage() {
           <div className="flex flex-wrap justify-center gap-6 lg:gap-12 text-sm">
             <div className="flex items-center gap-2">
               <Truck className="w-4 h-4 text-caramel" />
-              <span className={darkMode ? 'text-cream/70' : 'text-espresso/70'}>Free shipping over {formatPrice(35)}</span>
+              <span className={darkMode ? 'text-cream/70' : 'text-espresso/70'}>{t(language, 'shopFreeShipping')}</span>
             </div>
             <div className="flex items-center gap-2">
               <Shield className="w-4 h-4 text-caramel" />
-              <span className={darkMode ? 'text-cream/70' : 'text-espresso/70'}>Secure checkout</span>
+              <span className={darkMode ? 'text-cream/70' : 'text-espresso/70'}>{t(language, 'shopSecure')}</span>
             </div>
             <div className="flex items-center gap-2">
               <Star className="w-4 h-4 text-caramel" />
-              <span className={darkMode ? 'text-cream/70' : 'text-espresso/70'}>Freshness guaranteed</span>
+              <span className={darkMode ? 'text-cream/70' : 'text-espresso/70'}>{t(language, 'shopFreshness')}</span>
             </div>
           </div>
         </div>
@@ -67,7 +68,7 @@ export default function ShopPage() {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search products..."
+                placeholder={t(language, 'shopSearch')}
                 className={`w-full pl-10 pr-4 py-2.5 rounded-full border ${darkMode ? 'bg-dark-card border-dark-surface text-cream placeholder-cream/40' : 'bg-white border-beige text-espresso placeholder-espresso/40'} focus:outline-none focus:border-caramel`}
               />
             </div>
@@ -95,7 +96,7 @@ export default function ShopPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {shopProducts.length === 0 ? (
             <div className="text-center py-16">
-              <p className={`text-lg ${darkMode ? 'text-cream/60' : 'text-espresso/60'}`}>No products found. Try adjusting your search.</p>
+              <p className={`text-lg ${darkMode ? 'text-cream/60' : 'text-espresso/60'}`}>{t(language, 'shopNoProducts')}</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -103,7 +104,7 @@ export default function ShopPage() {
                 <div key={product.id} className={`card-hover rounded-2xl overflow-hidden ${darkMode ? 'bg-dark-card' : 'bg-white'} shadow-md animate-fade-in-up`} style={{ animationDelay: `${index * 0.05}s` }}>
                   <Link to={`/product/${product.id}`}>
                     <div className="img-zoom relative h-52">
-                      <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
+                      <img src={product.image} alt={getProductName(product.id, language, product.name)} className="w-full h-full object-cover" />
                       <button
                         onClick={(e) => { e.preventDefault(); addToWishlist(product); }}
                         className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/80 flex items-center justify-center hover:bg-caramel hover:text-white transition-all"
@@ -112,24 +113,24 @@ export default function ShopPage() {
                       </button>
                       {product.quantity < 10 && (
                         <span className="absolute bottom-3 left-3 px-2.5 py-1 rounded-full bg-red-500/90 text-white text-xs font-medium">
-                          Only {product.quantity} left
+                          {t(language, 'shopOnlyLeft')} {product.quantity}
                         </span>
                       )}
                     </div>
                   </Link>
                   <div className="p-4">
-                    <span className={`text-xs font-medium uppercase tracking-wide ${darkMode ? 'text-caramel/80' : 'text-caramel'}`}>{product.category}</span>
+                    <span className={`text-xs font-medium uppercase tracking-wide ${darkMode ? 'text-caramel/80' : 'text-caramel'}`}>{getCategoryName(product.category, language)}</span>
                     <Link to={`/product/${product.id}`}>
-                      <h3 className={`font-serif text-lg font-semibold mt-1 mb-1 hover:text-caramel transition-colors ${darkMode ? 'text-cream' : 'text-espresso'}`}>{product.name}</h3>
+                      <h3 className={`font-serif text-lg font-semibold mt-1 mb-1 hover:text-caramel transition-colors ${darkMode ? 'text-cream' : 'text-espresso'}`}>{getProductName(product.id, language, product.name)}</h3>
                     </Link>
-                    <p className={`text-sm mb-3 line-clamp-2 ${darkMode ? 'text-cream/50' : 'text-espresso/50'}`}>{product.description}</p>
+                    <p className={`text-sm mb-3 line-clamp-2 ${darkMode ? 'text-cream/50' : 'text-espresso/50'}`}>{getProductDescription(product.id, language, product.description)}</p>
                     <div className="flex items-center justify-between">
                       <span className="text-caramel font-bold text-lg">{formatPrice(product.price)}</span>
                       <button
                         onClick={() => addToCart(product)}
                         className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-caramel text-white text-sm font-medium hover:bg-warm-brown transition-all shadow-sm"
                       >
-                        <ShoppingBag className="w-3.5 h-3.5" /> Add
+                        <ShoppingBag className="w-3.5 h-3.5" /> {t(language, 'shopAdd')}
                       </button>
                     </div>
                   </div>
