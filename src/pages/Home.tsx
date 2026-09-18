@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import { ArrowRight, Star, Clock, MapPin, Heart, ShoppingBag } from 'lucide-react';
 import { formatPrice } from '../utils/currency';
+import { t, getProductName, getProductDescription, getCategoryName, getRoastLevelName } from '../utils/translations';
 
 export default function Home() {
-  const { products, addToCart, addToWishlist, darkMode } = useApp();
+  const { products, addToCart, addToWishlist, darkMode, language } = useApp();
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
@@ -40,19 +41,19 @@ export default function Home() {
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="max-w-2xl animate-fade-in-up">
-            <p className="text-caramel font-medium text-sm uppercase tracking-wider mb-4">Welcome to Coffeetoria</p>
+            <p className="text-caramel font-medium text-sm uppercase tracking-wider mb-4">{t(language, 'homeWelcome')}</p>
             <h1 className="font-serif text-4xl sm:text-5xl lg:text-7xl font-bold text-cream leading-tight mb-6">
-              Start Your Morning with the <span className="text-caramel italic">Perfect</span> Roast
+              {t(language, 'homeHeroTitle1')} <span className="text-caramel italic">{t(language, 'homeHeroTitle2')}</span> {t(language, 'homeHeroTitle3')}
             </h1>
             <p className="text-cream/80 text-lg lg:text-xl mb-8 leading-relaxed">
-              Freshly roasted. Cozy vibes. Perfect brew. Discover your new favorite cup at our neighborhood coffee sanctuary.
+              {t(language, 'homeHeroDesc')}
             </p>
             <div className="flex flex-wrap gap-4">
               <Link to="/menu" className="btn-primary inline-flex items-center gap-2">
-                Order Now <ArrowRight className="w-4 h-4" />
+                {t(language, 'homeOrderNow')} <ArrowRight className="w-4 h-4" />
               </Link>
               <Link to="/reservation" className="btn-outline inline-flex items-center gap-2 border-cream/40 text-cream hover:bg-cream hover:text-espresso">
-                Reserve a Table
+                {t(language, 'homeReserveTable')}
               </Link>
             </div>
           </div>
@@ -68,15 +69,15 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
             <div className="flex items-center justify-center gap-3">
               <Clock className="w-5 h-5 text-caramel" />
-              <span className={`text-sm font-medium ${darkMode ? 'text-cream/80' : 'text-espresso/80'}`}>Freshly Roasted Daily</span>
+              <span className={`text-sm font-medium ${darkMode ? 'text-cream/80' : 'text-espresso/80'}`}>{t(language, 'homeFreshRoasted')}</span>
             </div>
             <div className="flex items-center justify-center gap-3">
               <MapPin className="w-5 h-5 text-caramel" />
-              <span className={`text-sm font-medium ${darkMode ? 'text-cream/80' : 'text-espresso/80'}`}>Locally Sourced Beans</span>
+              <span className={`text-sm font-medium ${darkMode ? 'text-cream/80' : 'text-espresso/80'}`}>{t(language, 'homeLocallySourced')}</span>
             </div>
             <div className="flex items-center justify-center gap-3">
               <Star className="w-5 h-5 text-caramel" />
-              <span className={`text-sm font-medium ${darkMode ? 'text-cream/80' : 'text-espresso/80'}`}>Award-Winning Roasts</span>
+              <span className={`text-sm font-medium ${darkMode ? 'text-cream/80' : 'text-espresso/80'}`}>{t(language, 'homeAwardWinning')}</span>
             </div>
           </div>
         </div>
@@ -86,10 +87,10 @@ export default function Home() {
       <section className={`py-16 lg:py-24 ${darkMode ? 'bg-dark-bg' : 'bg-cream'} coffee-pattern`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <p className="text-caramel font-medium text-sm uppercase tracking-wider mb-2">Our Signature Collection</p>
-            <h2 className="font-serif text-3xl lg:text-5xl font-bold text-espresso dark:text-cream">Featured Drinks</h2>
+            <p className="text-caramel font-medium text-sm uppercase tracking-wider mb-2">{t(language, 'homeFeaturedSubtitle')}</p>
+            <h2 className="font-serif text-3xl lg:text-5xl font-bold text-espresso dark:text-cream">{t(language, 'homeFeaturedTitle')}</h2>
             <p className={`mt-4 max-w-2xl mx-auto ${darkMode ? 'text-cream/60' : 'text-espresso/60'}`}>
-              Each cup is crafted with care, using beans roasted to perfection in our on-site roastery.
+              {t(language, 'homeFeaturedDesc')}
             </p>
           </div>
 
@@ -97,7 +98,7 @@ export default function Home() {
             {featuredDrinks.map((product, index) => (
               <div key={product.id} className={`card-hover rounded-2xl overflow-hidden ${darkMode ? 'bg-dark-card' : 'bg-white'} shadow-lg`} style={{ animationDelay: `${index * 0.1}s` }}>
                 <div className="img-zoom relative h-56">
-                  <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
+                  <img src={product.image} alt={getProductName(product.id, language, product.name)} className="w-full h-full object-cover" />
                   <button
                     onClick={() => addToWishlist(product)}
                     className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/80 flex items-center justify-center hover:bg-caramel hover:text-white transition-all"
@@ -106,20 +107,20 @@ export default function Home() {
                   </button>
                   {product.roastLevel && (
                     <span className="absolute bottom-3 left-3 px-3 py-1 rounded-full bg-espresso/80 text-cream text-xs font-medium">
-                      {product.roastLevel} Roast
+                      {getRoastLevelName(product.roastLevel || '', language)}
                     </span>
                   )}
                 </div>
                 <div className="p-5">
-                  <h3 className={`font-serif text-lg font-semibold mb-1 ${darkMode ? 'text-cream' : 'text-espresso'}`}>{product.name}</h3>
-                  <p className={`text-sm mb-3 line-clamp-2 ${darkMode ? 'text-cream/60' : 'text-espresso/60'}`}>{product.description}</p>
+                  <h3 className={`font-serif text-lg font-semibold mb-1 ${darkMode ? 'text-cream' : 'text-espresso'}`}>{getProductName(product.id, language, product.name)}</h3>
+                  <p className={`text-sm mb-3 line-clamp-2 ${darkMode ? 'text-cream/60' : 'text-espresso/60'}`}>{getProductDescription(product.id, language, product.description)}</p>
                   <div className="flex items-center justify-between">
                     <span className="text-caramel font-bold text-lg">{formatPrice(product.price)}</span>
                     <button
                       onClick={() => addToCart(product)}
                       className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-caramel/10 text-caramel text-sm font-medium hover:bg-caramel hover:text-white transition-all"
                     >
-                      <ShoppingBag className="w-3.5 h-3.5" /> Add
+                      <ShoppingBag className="w-3.5 h-3.5" /> {t(language, 'homeAdd')}
                     </button>
                   </div>
                 </div>
@@ -129,7 +130,7 @@ export default function Home() {
 
           <div className="text-center mt-10">
             <Link to="/menu" className="btn-outline inline-flex items-center gap-2">
-              View Full Menu <ArrowRight className="w-4 h-4" />
+              {t(language, 'homeViewFullMenu')} <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
@@ -139,15 +140,15 @@ export default function Home() {
       <section className={`py-16 lg:py-24 ${darkMode ? 'bg-dark-card' : 'bg-beige'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <p className="text-caramel font-medium text-sm uppercase tracking-wider mb-2">Customer Favorites</p>
-            <h2 className="font-serif text-3xl lg:text-5xl font-bold text-espresso dark:text-cream">Best Sellers</h2>
+            <p className="text-caramel font-medium text-sm uppercase tracking-wider mb-2">{t(language, 'homeBestSellersSubtitle')}</p>
+            <h2 className="font-serif text-3xl lg:text-5xl font-bold text-espresso dark:text-cream">{t(language, 'homeBestSellersTitle')}</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {bestSellers.map((product, index) => (
               <Link to={`/product/${product.id}`} key={product.id} className={`card-hover rounded-2xl overflow-hidden ${darkMode ? 'bg-dark-surface' : 'bg-white'} shadow-md`} style={{ animationDelay: `${index * 0.1}s` }}>
                 <div className="img-zoom h-48">
-                  <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
+                  <img src={product.image} alt={getProductName(product.id, language, product.name)} className="w-full h-full object-cover" />
                 </div>
                 <div className="p-4">
                   <div className="flex items-center gap-1 mb-2">
@@ -155,7 +156,7 @@ export default function Home() {
                     <span className={`text-sm font-medium ${darkMode ? 'text-cream/80' : 'text-espresso/80'}`}>{product.rating}</span>
                     <span className={`text-xs ${darkMode ? 'text-cream/50' : 'text-espresso/50'}`}>({product.reviews})</span>
                   </div>
-                  <h3 className={`font-serif font-semibold ${darkMode ? 'text-cream' : 'text-espresso'}`}>{product.name}</h3>
+                  <h3 className={`font-serif font-semibold ${darkMode ? 'text-cream' : 'text-espresso'}`}>{getProductName(product.id, language, product.name)}</h3>
                   <p className="text-caramel font-bold mt-1">{formatPrice(product.price)}</p>
                 </div>
               </Link>
@@ -178,22 +179,22 @@ export default function Home() {
               </div>
               <div className={`absolute -bottom-6 -right-6 p-6 rounded-2xl shadow-xl ${darkMode ? 'bg-dark-card' : 'bg-white'}`}>
                 <p className="font-serif text-3xl font-bold text-caramel">6+</p>
-                <p className={`text-sm ${darkMode ? 'text-cream/60' : 'text-espresso/60'}`}>Years of Passion</p>
+                <p className={`text-sm ${darkMode ? 'text-cream/60' : 'text-espresso/60'}`}>{t(language, 'homeYearsPassion')}</p>
               </div>
             </div>
             <div>
-              <p className="text-caramel font-medium text-sm uppercase tracking-wider mb-2">Our Story</p>
+              <p className="text-caramel font-medium text-sm uppercase tracking-wider mb-2">{t(language, 'homeOurStorySubtitle')}</p>
               <h2 className="font-serif text-3xl lg:text-4xl font-bold text-espresso dark:text-cream mb-6">
-                Where Every Cup Tells a Story
+                {t(language, 'homeOurStoryTitle')}
               </h2>
               <p className={`text-lg leading-relaxed mb-6 ${darkMode ? 'text-cream/70' : 'text-espresso/70'}`}>
-                Born from a love of exceptional coffee and genuine connection, Coffeetoria has been the heart of our community since 2018. We source our beans from sustainable farms, roast them in-house, and serve every cup with a smile.
+                {t(language, 'homeOurStoryDesc1')}
               </p>
               <p className={`leading-relaxed mb-8 ${darkMode ? 'text-cream/60' : 'text-espresso/60'}`}>
-                Whether you're here for a quick espresso or a long afternoon with a good book, we've created a space that feels like home. Because great coffee isn't just about the beans — it's about the moments they create.
+                {t(language, 'homeOurStoryDesc2')}
               </p>
               <Link to="/about" className="btn-primary inline-flex items-center gap-2">
-                Learn More About Us <ArrowRight className="w-4 h-4" />
+                {t(language, 'homeLearnMore')} <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
           </div>
@@ -211,13 +212,13 @@ export default function Home() {
           <div className="absolute inset-0 bg-espresso/85"></div>
         </div>
         <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-serif text-3xl lg:text-4xl font-bold text-cream mb-4">Stay in the Loop</h2>
+          <h2 className="font-serif text-3xl lg:text-4xl font-bold text-cream mb-4">{t(language, 'homeNewsletterTitle')}</h2>
           <p className="text-cream/70 mb-8 text-lg">
-            Join our coffee-loving community. Get exclusive offers, new blend announcements, and brewing tips delivered to your inbox.
+            {t(language, 'homeNewsletterDesc')}
           </p>
           {subscribed ? (
             <div className="bg-forest/20 border border-forest-light/30 rounded-2xl p-6">
-              <p className="text-cream text-lg font-medium">☕ Welcome to the family! Check your inbox for a special surprise.</p>
+              <p className="text-cream text-lg font-medium">{t(language, 'homeSubscribedMsg')}</p>
             </div>
           ) : (
             <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
@@ -225,12 +226,12 @@ export default function Home() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="your@email.com"
+                placeholder={t(language, 'homeNewsletterPlaceholder')}
                 required
                 className="flex-1 px-5 py-3 rounded-full bg-cream/10 border border-cream/20 text-cream placeholder-cream/50 focus:outline-none focus:border-caramel"
               />
               <button type="submit" className="btn-primary whitespace-nowrap">
-                Subscribe
+                {t(language, 'homeSubscribe')}
               </button>
             </form>
           )}
