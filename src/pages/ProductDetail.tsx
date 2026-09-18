@@ -3,10 +3,11 @@ import { useParams, Link } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import { Star, Heart, ShoppingBag, ArrowLeft, Minus, Plus, Truck, RotateCcw, Shield } from 'lucide-react';
 import { formatPrice } from '../utils/currency';
+import { t, getProductName, getProductDescription, getCategoryName, getRoastLevelName } from '../utils/translations';
 
 export default function ProductDetail() {
   const { id } = useParams();
-  const { products, addToCart, addToWishlist, removeFromWishlist, wishlist, darkMode } = useApp();
+  const { products, addToCart, addToWishlist, removeFromWishlist, wishlist, darkMode, language } = useApp();
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState('description');
 
@@ -18,8 +19,8 @@ export default function ProductDetail() {
     return (
       <div className={`min-h-screen flex items-center justify-center ${darkMode ? 'bg-dark-bg text-cream' : 'bg-cream text-espresso'}`}>
         <div className="text-center">
-          <h2 className="font-serif text-2xl font-bold mb-4">Product Not Found</h2>
-          <Link to="/shop" className="btn-primary">Back to Shop</Link>
+          <h2 className="font-serif text-2xl font-bold mb-4">{t(language, 'prodNotFound')}</h2>
+          <Link to="/shop" className="btn-primary">{t(language, 'prodBackToShop')}</Link>
         </div>
       </div>
     );
@@ -31,11 +32,11 @@ export default function ProductDetail() {
       <div className={`border-b ${darkMode ? 'border-dark-surface' : 'border-beige'} py-3`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-2 text-sm">
-            <Link to="/" className={`${darkMode ? 'text-cream/60 hover:text-caramel' : 'text-espresso/60 hover:text-caramel'} transition-colors`}>Home</Link>
+            <Link to="/" className={`${darkMode ? 'text-cream/60 hover:text-caramel' : 'text-espresso/60 hover:text-caramel'} transition-colors`}>{t(language, 'prodHome')}</Link>
             <span className={darkMode ? 'text-cream/30' : 'text-espresso/30'}>/</span>
-            <Link to="/shop" className={`${darkMode ? 'text-cream/60 hover:text-caramel' : 'text-espresso/60 hover:text-caramel'} transition-colors`}>Shop</Link>
+            <Link to="/shop" className={`${darkMode ? 'text-cream/60 hover:text-caramel' : 'text-espresso/60 hover:text-caramel'} transition-colors`}>{t(language, 'prodShop')}</Link>
             <span className={darkMode ? 'text-cream/30' : 'text-espresso/30'}>/</span>
-            <span className="text-caramel">{product.name}</span>
+            <span className="text-caramel">{getProductName(product.id, language, product.name)}</span>
           </div>
         </div>
       </div>
@@ -44,22 +45,22 @@ export default function ProductDetail() {
       <section className="py-8 lg:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link to="/shop" className={`inline-flex items-center gap-2 mb-8 text-sm ${darkMode ? 'text-cream/60 hover:text-caramel' : 'text-espresso/60 hover:text-caramel'} transition-colors`}>
-            <ArrowLeft className="w-4 h-4" /> Back to Shop
+            <ArrowLeft className="w-4 h-4" /> {t(language, 'prodBackToShop')}
           </Link>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
             {/* Image */}
             <div className="space-y-4">
               <div className={`img-zoom rounded-2xl overflow-hidden ${darkMode ? 'bg-dark-card' : 'bg-white'} shadow-lg`}>
-                <img src={product.image} alt={product.name} className="w-full h-[400px] lg:h-[500px] object-cover" />
+                <img src={product.image} alt={getProductName(product.id, language, product.name)} className="w-full h-[400px] lg:h-[500px] object-cover" />
               </div>
             </div>
 
             {/* Info */}
             <div className="space-y-6">
               <div>
-                <span className={`text-sm font-medium uppercase tracking-wider ${darkMode ? 'text-caramel/80' : 'text-caramel'}`}>{product.category}</span>
-                <h1 className={`font-serif text-3xl lg:text-4xl font-bold mt-2 ${darkMode ? 'text-cream' : 'text-espresso'}`}>{product.name}</h1>
+                <span className={`text-sm font-medium uppercase tracking-wider ${darkMode ? 'text-caramel/80' : 'text-caramel'}`}>{getCategoryName(product.category, language)}</span>
+                <h1 className={`font-serif text-3xl lg:text-4xl font-bold mt-2 ${darkMode ? 'text-cream' : 'text-espresso'}`}>{getProductName(product.id, language, product.name)}</h1>
               </div>
 
               {/* Rating */}
@@ -70,7 +71,7 @@ export default function ProductDetail() {
                   ))}
                 </div>
                 <span className={`text-sm ${darkMode ? 'text-cream/60' : 'text-espresso/60'}`}>
-                  {product.rating} ({product.reviews} reviews)
+                  {product.rating} ({product.reviews} {t(language, 'prodReviews')})
                 </span>
               </div>
 
@@ -80,7 +81,7 @@ export default function ProductDetail() {
               {/* Roast Level */}
               {product.roastLevel && (
                 <div className="flex items-center gap-3">
-                  <span className={`text-sm font-medium ${darkMode ? 'text-cream/70' : 'text-espresso/70'}`}>Roast Level:</span>
+                  <span className={`text-sm font-medium ${darkMode ? 'text-cream/70' : 'text-espresso/70'}`}>{t(language, 'prodRoastLevel')}</span>
                   <div className="flex gap-1">
                     {['Light', 'Medium', 'Dark'].map((level) => (
                       <div key={level} className={`w-6 h-6 rounded-full border-2 ${
@@ -88,13 +89,13 @@ export default function ProductDetail() {
                       } ${level === 'Light' ? 'bg-amber-200' : level === 'Medium' ? 'bg-amber-600' : 'bg-amber-900'}`} title={level} />
                     ))}
                   </div>
-                  <span className={`text-sm ${darkMode ? 'text-cream/50' : 'text-espresso/50'}`}>{product.roastLevel}</span>
+                  <span className={`text-sm ${darkMode ? 'text-cream/50' : 'text-espresso/50'}`}>{getRoastLevelName(product.roastLevel || '', language)}</span>
                 </div>
               )}
 
               {/* Quantity */}
               <div className="flex items-center gap-4">
-                <span className={`text-sm font-medium ${darkMode ? 'text-cream/70' : 'text-espresso/70'}`}>Quantity:</span>
+                <span className={`text-sm font-medium ${darkMode ? 'text-cream/70' : 'text-espresso/70'}`}>{t(language, 'prodQuantity')}</span>
                 <div className={`flex items-center gap-3 rounded-full border ${darkMode ? 'border-dark-surface bg-dark-card' : 'border-beige bg-white'} px-3 py-1`}>
                   <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className={`p-1 rounded-full hover:bg-caramel/10 ${darkMode ? 'text-cream' : 'text-espresso'}`}>
                     <Minus className="w-4 h-4" />
@@ -105,7 +106,7 @@ export default function ProductDetail() {
                   </button>
                 </div>
                 <span className={`text-sm ${product.quantity < 10 ? 'text-red-500' : darkMode ? 'text-cream/50' : 'text-espresso/50'}`}>
-                  {product.quantity < 10 ? `Only ${product.quantity} left!` : 'In Stock'}
+                  {product.quantity < 10 ? `${t(language, 'prodOnlyLeft')} ${product.quantity}` : t(language, 'prodInStock')}
                 </span>
               </div>
 
@@ -115,13 +116,13 @@ export default function ProductDetail() {
                   onClick={() => { for (let i = 0; i < quantity; i++) addToCart(product); }}
                   className="btn-primary flex items-center gap-2"
                 >
-                  <ShoppingBag className="w-4 h-4" /> Add to Cart
+                  <ShoppingBag className="w-4 h-4" /> {t(language, 'prodAddToCart')}
                 </button>
                 <button
                   onClick={() => { for (let i = 0; i < quantity; i++) addToCart(product); window.location.href = '/cart'; }}
                   className="btn-outline flex items-center gap-2"
                 >
-                  Buy Now
+                  {t(language, 'prodBuyNow')}
                 </button>
                 <button
                   onClick={() => isInWishlist ? removeFromWishlist(product.id) : addToWishlist(product)}
@@ -135,15 +136,15 @@ export default function ProductDetail() {
               <div className={`grid grid-cols-3 gap-3 pt-4 border-t ${darkMode ? 'border-dark-surface' : 'border-beige'}`}>
                 <div className="text-center">
                   <Truck className="w-5 h-5 text-caramel mx-auto mb-1" />
-                  <p className={`text-xs ${darkMode ? 'text-cream/60' : 'text-espresso/60'}`}>Free Shipping</p>
+                  <p className={`text-xs ${darkMode ? 'text-cream/60' : 'text-espresso/60'}`}>{t(language, 'prodFreeShipping')}</p>
                 </div>
                 <div className="text-center">
                   <RotateCcw className="w-5 h-5 text-caramel mx-auto mb-1" />
-                  <p className={`text-xs ${darkMode ? 'text-cream/60' : 'text-espresso/60'}`}>30-Day Returns</p>
+                  <p className={`text-xs ${darkMode ? 'text-cream/60' : 'text-espresso/60'}`}>{t(language, 'prod30DayReturns')}</p>
                 </div>
                 <div className="text-center">
                   <Shield className="w-5 h-5 text-caramel mx-auto mb-1" />
-                  <p className={`text-xs ${darkMode ? 'text-cream/60' : 'text-espresso/60'}`}>Secure Payment</p>
+                  <p className={`text-xs ${darkMode ? 'text-cream/60' : 'text-espresso/60'}`}>{t(language, 'prodSecurePayment')}</p>
                 </div>
               </div>
             </div>
@@ -160,23 +161,27 @@ export default function ProductDetail() {
                     activeTab === tab ? 'text-caramel border-b-2 border-caramel' : darkMode ? 'text-cream/50 hover:text-cream' : 'text-espresso/50 hover:text-espresso'
                   }`}
                 >
-                  {tab}
+                  {tab === 'description' ? t(language, 'prodDescription') : t(language, 'prodReviews')}
                 </button>
               ))}
             </div>
             <div className="py-8">
               {activeTab === 'description' ? (
                 <div className="max-w-3xl">
-                  <p className={`text-lg leading-relaxed ${darkMode ? 'text-cream/70' : 'text-espresso/70'}`}>{product.description}</p>
+                  <p className={`text-lg leading-relaxed ${darkMode ? 'text-cream/70' : 'text-espresso/70'}`}>{getProductDescription(product.id, language, product.description)}</p>
                   {product.roastLevel && (
                     <div className="mt-6">
-                      <h4 className={`font-serif text-lg font-semibold mb-3 ${darkMode ? 'text-cream' : 'text-espresso'}`}>Roast Profile</h4>
+                      <h4 className={`font-serif text-lg font-semibold mb-3 ${darkMode ? 'text-cream' : 'text-espresso'}`}>{t(language, 'prodRoastProfile')}</h4>
                       <p className={`${darkMode ? 'text-cream/60' : 'text-espresso/60'}`}>
-                        This {product.roastLevel.toLowerCase()} roast brings out the best in every bean. {
+                        {language === 'ru' ? `Этот ${product.roastLevel === 'Light' ? 'лёгкий' : product.roastLevel === 'Medium' ? 'средний' : 'тёмный'} обжар раскрывает лучшее в каждом зёрнышке. ${
+                          product.roastLevel === 'Light' ? 'Яркая кислотность с деликатными цветочными и фруктовыми нотами.' :
+                          product.roastLevel === 'Medium' ? 'Сбалансированное тело с насыщенной карамельной сладостью и тонкой сложностью.' :
+                          'Насыщенный, плотный вкус с дымными оттенками и бархатистым послевкусием.'
+                        }` : `This ${product.roastLevel.toLowerCase()} roast brings out the best in every bean. ${
                           product.roastLevel === 'Light' ? 'Bright acidity with delicate floral and fruity notes.' :
                           product.roastLevel === 'Medium' ? 'Balanced body with rich caramel sweetness and subtle complexity.' :
                           'Bold, full-bodied with smoky undertones and a velvety finish.'
-                        }
+                        }`}
                       </p>
                     </div>
                   )}
@@ -211,15 +216,15 @@ export default function ProductDetail() {
           {/* Related Products */}
           {relatedProducts.length > 0 && (
             <div className="mt-16">
-              <h3 className={`font-serif text-2xl font-bold mb-8 ${darkMode ? 'text-cream' : 'text-espresso'}`}>You Might Also Like</h3>
+              <h3 className={`font-serif text-2xl font-bold mb-8 ${darkMode ? 'text-cream' : 'text-espresso'}`}>{t(language, 'prodRelatedTitle')}</h3>
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
                 {relatedProducts.map(p => (
                   <Link to={`/product/${p.id}`} key={p.id} className={`card-hover rounded-xl overflow-hidden ${darkMode ? 'bg-dark-card' : 'bg-white'} shadow-md`}>
                     <div className="img-zoom h-36">
-                      <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
+                      <img src={p.image} alt={getProductName(p.id, language, p.name)} className="w-full h-full object-cover" />
                     </div>
                     <div className="p-3">
-                      <h4 className={`font-serif text-sm font-semibold ${darkMode ? 'text-cream' : 'text-espresso'}`}>{p.name}</h4>
+                      <h4 className={`font-serif text-sm font-semibold ${darkMode ? 'text-cream' : 'text-espresso'}`}>{getProductName(p.id, language, p.name)}</h4>
                       <p className="text-caramel font-bold text-sm mt-1">{formatPrice(p.price)}</p>
                     </div>
                   </Link>
