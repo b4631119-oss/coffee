@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useApp } from '../context/AppContext';
+import { formatPrice } from '../utils/currency';
 import { Link } from 'react-router-dom';
 import { User, ShoppingBag, Heart, LogIn, UserPlus, Package, Settings } from 'lucide-react';
 
@@ -146,9 +147,9 @@ export default function Account() {
                 <h2 className={`font-serif text-2xl font-bold mb-6 ${darkMode ? 'text-cream' : 'text-espresso'}`}>Order History</h2>
                 <div className="space-y-4">
                   {[
-                    { id: '#BH-1024', date: 'Dec 15, 2026', items: 'Colombian Beans, Ceramic Mug', total: '$34.99', status: 'Delivered' },
-                    { id: '#BH-1018', date: 'Dec 8, 2026', items: 'Ethiopian Yirgacheffe', total: '$19.99', status: 'Delivered' },
-                    { id: '#BH-1005', date: 'Nov 28, 2026', items: 'Insulated Tumbler, Dark Roast', total: '$42.99', status: 'Delivered' },
+                    { id: '#BH-1024', date: 'Dec 15, 2026', items: 'Colombian Beans, Ceramic Mug', total: 34.99, status: 'Delivered' },
+                    { id: '#BH-1018', date: 'Dec 8, 2026', items: 'Ethiopian Yirgacheffe', total: 19.99, status: 'Delivered' },
+                    { id: '#BH-1005', date: 'Nov 28, 2026', items: 'Insulated Tumbler, Dark Roast', total: 42.99, status: 'Delivered' },
                   ].map(order => (
                     <div key={order.id} className={`flex flex-col sm:flex-row sm:items-center justify-between p-4 rounded-xl border ${darkMode ? 'border-dark-surface bg-dark-surface/50' : 'border-beige bg-cream/50'}`}>
                       <div>
@@ -156,7 +157,7 @@ export default function Account() {
                         <p className={`text-sm ${darkMode ? 'text-cream/50' : 'text-espresso/50'}`}>{order.date} • {order.items}</p>
                       </div>
                       <div className="flex items-center gap-4 mt-2 sm:mt-0">
-                        <span className="text-caramel font-bold">{order.total}</span>
+                        <span className="text-caramel font-bold">{formatPrice(order.total)}</span>
                         <span className="px-3 py-1 rounded-full bg-forest/10 text-forest-light text-xs font-medium">{order.status}</span>
                       </div>
                     </div>
@@ -181,7 +182,7 @@ export default function Account() {
                         <img src={item.image} alt={item.name} className="w-16 h-16 rounded-lg object-cover" />
                         <div className="flex-1">
                           <h4 className={`font-medium text-sm ${darkMode ? 'text-cream' : 'text-espresso'}`}>{item.name}</h4>
-                          <p className="text-caramel font-bold text-sm">${item.price.toFixed(2)}</p>
+                          <p className="text-caramel font-bold text-sm">{formatPrice(item.price)}</p>
                           <div className="flex gap-2 mt-2">
                             <button onClick={() => addToCart(item)} className="text-xs px-3 py-1 rounded-full bg-caramel text-white">Add to Cart</button>
                             <button onClick={() => removeFromWishlist(item.id)} className="text-xs px-3 py-1 rounded-full border border-red-300 text-red-400 hover:bg-red-50">Remove</button>

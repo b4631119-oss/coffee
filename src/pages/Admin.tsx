@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useApp, Product } from '../context/AppContext';
 import { Lock, Plus, Edit, Trash2, Search, Filter, Package, DollarSign, TrendingUp, Users, Save, X, Database } from 'lucide-react';
+import { formatPrice } from '../utils/currency';
 
 export default function Admin() {
   const { products, addProduct, updateProduct, deleteProduct, loadSampleProducts, darkMode } = useApp();
@@ -151,7 +152,7 @@ export default function Admin() {
                 <DollarSign className="w-5 h-5 text-forest-light" />
               </div>
               <div>
-                <p className={`text-2xl font-bold ${darkMode ? 'text-cream' : 'text-espresso'}`}>${totalValue.toFixed(0)}</p>
+                <p className={`text-2xl font-bold ${darkMode ? 'text-cream' : 'text-espresso'}`}>{formatPrice(totalValue)}</p>
                 <p className={`text-xs ${darkMode ? 'text-cream/50' : 'text-espresso/50'}`}>Inventory Value</p>
               </div>
             </div>
@@ -296,7 +297,7 @@ export default function Admin() {
                 <p className={`text-xs mb-2 line-clamp-2 ${darkMode ? 'text-cream/50' : 'text-espresso/50'}`}>{product.description}</p>
                 <div className="flex items-center justify-between">
                   <div>
-                    <span className="text-caramel font-bold">${product.price.toFixed(2)}</span>
+                    <span className="text-caramel font-bold">{formatPrice(product.price)}</span>
                     <span className={`text-xs ml-2 ${product.quantity < 20 ? 'text-red-500' : darkMode ? 'text-cream/40' : 'text-espresso/40'}`}>
                       Qty: {product.quantity}
                     </span>

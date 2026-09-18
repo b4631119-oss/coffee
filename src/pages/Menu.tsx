@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useApp } from '../context/AppContext';
 import { Link } from 'react-router-dom';
 import { Search, ShoppingBag, Heart, Filter, Star } from 'lucide-react';
+import { formatPrice } from '../utils/currency';
 
 export default function MenuPage() {
   const { products, addToCart, addToWishlist, darkMode, searchQuery, setSearchQuery } = useApp();
@@ -117,7 +118,7 @@ export default function MenuPage() {
                     </Link>
                     <p className={`text-sm mb-3 line-clamp-2 ${darkMode ? 'text-cream/50' : 'text-espresso/50'}`}>{product.description}</p>
                     <div className="flex items-center justify-between">
-                      <span className="text-caramel font-bold text-lg">${product.price.toFixed(2)}</span>
+                      <span className="text-caramel font-bold text-lg">{formatPrice(product.price)}</span>
                       <button
                         onClick={() => addToCart(product)}
                         className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-caramel text-white text-sm font-medium hover:bg-warm-brown transition-all shadow-sm"

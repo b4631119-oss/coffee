@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import { Minus, Plus, Trash2, ArrowLeft, Tag, ShoppingBag, CreditCard, Truck, CheckCircle } from 'lucide-react';
+import { formatPrice } from '../utils/currency';
 
 export default function CartPage() {
   const { cart, removeFromCart, updateCartQuantity, clearCart, cartTotal, darkMode } = useApp();
@@ -104,7 +105,7 @@ export default function CartPage() {
                           <Plus className="w-3.5 h-3.5" />
                         </button>
                       </div>
-                      <span className="text-caramel font-bold">${(item.price * item.cartQuantity).toFixed(2)}</span>
+                      <span className="text-caramel font-bold">{formatPrice(item.price * item.cartQuantity)}</span>
                     </div>
                   </div>
                 </div>
@@ -131,32 +132,32 @@ export default function CartPage() {
                   Apply
                 </button>
               </div>
-              {couponApplied && <p className="text-forest-light text-sm mb-4">✓ Coupon applied! You saved ${discount.toFixed(2)}</p>}
+              {couponApplied && <p className="text-forest-light text-sm mb-4">✓ Coupon applied! You saved {formatPrice(discount)}</p>}
 
               <div className={`space-y-3 py-4 border-t border-b ${darkMode ? 'border-dark-surface' : 'border-beige'}`}>
                 <div className="flex justify-between text-sm">
                   <span className={darkMode ? 'text-cream/60' : 'text-espresso/60'}>Subtotal</span>
-                  <span className={darkMode ? 'text-cream' : 'text-espresso'}>${cartTotal.toFixed(2)}</span>
+                  <span className={darkMode ? 'text-cream' : 'text-espresso'}>{formatPrice(cartTotal)}</span>
                 </div>
                 {discount > 0 && (
                   <div className="flex justify-between text-sm text-forest-light">
                     <span>Discount</span>
-                    <span>-${discount.toFixed(2)}</span>
+                    <span>-{formatPrice(discount)}</span>
                   </div>
                 )}
                 <div className="flex justify-between text-sm">
                   <span className={darkMode ? 'text-cream/60' : 'text-espresso/60'}>Shipping</span>
-                  <span className={darkMode ? 'text-cream' : 'text-espresso'}>{shipping === 0 ? 'Free' : `$${shipping.toFixed(2)}`}</span>
+                  <span className={darkMode ? 'text-cream' : 'text-espresso'}>{shipping === 0 ? 'Free' : formatPrice(shipping)}</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className={darkMode ? 'text-cream/60' : 'text-espresso/60'}>Tax</span>
-                  <span className={darkMode ? 'text-cream' : 'text-espresso'}>${tax.toFixed(2)}</span>
+                  <span className={darkMode ? 'text-cream' : 'text-espresso'}>{formatPrice(tax)}</span>
                 </div>
               </div>
 
               <div className="flex justify-between items-center pt-4">
                 <span className={`font-serif text-lg font-semibold ${darkMode ? 'text-cream' : 'text-espresso'}`}>Total</span>
-                <span className="text-2xl font-bold text-caramel">${total.toFixed(2)}</span>
+                <span className="text-2xl font-bold text-caramel">{formatPrice(total)}</span>
               </div>
 
               <button onClick={() => setShowCheckout(true)} className="btn-primary w-full mt-6 flex items-center justify-center gap-2">
@@ -165,7 +166,7 @@ export default function CartPage() {
 
               {cartTotal < 35 && (
                 <p className={`text-xs text-center mt-3 ${darkMode ? 'text-cream/50' : 'text-espresso/50'}`}>
-                  Add ${(35 - cartTotal).toFixed(2)} more for free shipping!
+                  Add {formatPrice(35 - cartTotal)} more for free shipping!
                 </p>
               )}
             </div>
@@ -212,7 +213,7 @@ export default function CartPage() {
               </div>
 
               <button type="submit" className="btn-primary w-full flex items-center justify-center gap-2">
-                <Truck className="w-4 h-4" /> Place Order — ${total.toFixed(2)}
+                <Truck className="w-4 h-4" /> Place Order — {formatPrice(total)}
               </button>
             </form>
 
@@ -227,26 +228,26 @@ export default function CartPage() {
                       <p className={`text-sm font-medium ${darkMode ? 'text-cream' : 'text-espresso'}`}>{item.name}</p>
                       <p className={`text-xs ${darkMode ? 'text-cream/50' : 'text-espresso/50'}`}>x{item.cartQuantity}</p>
                     </div>
-                    <span className={`text-sm font-medium ${darkMode ? 'text-cream' : 'text-espresso'}`}>${(item.price * item.cartQuantity).toFixed(2)}</span>
+                    <span className={`text-sm font-medium ${darkMode ? 'text-cream' : 'text-espresso'}`}>{formatPrice(item.price * item.cartQuantity)}</span>
                   </div>
                 ))}
               </div>
               <div className={`border-t pt-3 space-y-2 ${darkMode ? 'border-dark-surface' : 'border-beige'}`}>
                 <div className="flex justify-between text-sm">
                   <span className={darkMode ? 'text-cream/60' : 'text-espresso/60'}>Subtotal</span>
-                  <span>${cartTotal.toFixed(2)}</span>
+                  <span>{formatPrice(cartTotal)}</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className={darkMode ? 'text-cream/60' : 'text-espresso/60'}>Shipping</span>
-                  <span>{shipping === 0 ? 'Free' : `$${shipping.toFixed(2)}`}</span>
+                  <span>{shipping === 0 ? 'Free' : formatPrice(shipping)}</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className={darkMode ? 'text-cream/60' : 'text-espresso/60'}>Tax</span>
-                  <span>${tax.toFixed(2)}</span>
+                  <span>{formatPrice(tax)}</span>
                 </div>
                 <div className={`flex justify-between font-bold text-lg pt-2 border-t ${darkMode ? 'border-dark-surface text-cream' : 'border-beige text-espresso'}`}>
                   <span>Total</span>
-                  <span className="text-caramel">${total.toFixed(2)}</span>
+                  <span className="text-caramel">{formatPrice(total)}</span>
                 </div>
               </div>
             </div>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useApp } from '../context/AppContext';
 import { Link } from 'react-router-dom';
 import { Search, ShoppingBag, Heart, Star, Truck, Shield } from 'lucide-react';
+import { formatPrice } from '../utils/currency';
 
 export default function ShopPage() {
   const { products, addToCart, addToWishlist, darkMode, searchQuery, setSearchQuery } = useApp();
@@ -42,7 +43,7 @@ export default function ShopPage() {
           <div className="flex flex-wrap justify-center gap-6 lg:gap-12 text-sm">
             <div className="flex items-center gap-2">
               <Truck className="w-4 h-4 text-caramel" />
-              <span className={darkMode ? 'text-cream/70' : 'text-espresso/70'}>Free shipping over $35</span>
+              <span className={darkMode ? 'text-cream/70' : 'text-espresso/70'}>Free shipping over {formatPrice(35)}</span>
             </div>
             <div className="flex items-center gap-2">
               <Shield className="w-4 h-4 text-caramel" />
@@ -123,7 +124,7 @@ export default function ShopPage() {
                     </Link>
                     <p className={`text-sm mb-3 line-clamp-2 ${darkMode ? 'text-cream/50' : 'text-espresso/50'}`}>{product.description}</p>
                     <div className="flex items-center justify-between">
-                      <span className="text-caramel font-bold text-lg">${product.price.toFixed(2)}</span>
+                      <span className="text-caramel font-bold text-lg">{formatPrice(product.price)}</span>
                       <button
                         onClick={() => addToCart(product)}
                         className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-caramel text-white text-sm font-medium hover:bg-warm-brown transition-all shadow-sm"

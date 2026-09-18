@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import { ArrowRight, Star, Clock, MapPin, Heart, ShoppingBag } from 'lucide-react';
+import { formatPrice } from '../utils/currency';
 
 export default function Home() {
   const { products, addToCart, addToWishlist, darkMode } = useApp();
@@ -113,7 +114,7 @@ export default function Home() {
                   <h3 className={`font-serif text-lg font-semibold mb-1 ${darkMode ? 'text-cream' : 'text-espresso'}`}>{product.name}</h3>
                   <p className={`text-sm mb-3 line-clamp-2 ${darkMode ? 'text-cream/60' : 'text-espresso/60'}`}>{product.description}</p>
                   <div className="flex items-center justify-between">
-                    <span className="text-caramel font-bold text-lg">${product.price.toFixed(2)}</span>
+                    <span className="text-caramel font-bold text-lg">{formatPrice(product.price)}</span>
                     <button
                       onClick={() => addToCart(product)}
                       className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-caramel/10 text-caramel text-sm font-medium hover:bg-caramel hover:text-white transition-all"
@@ -155,7 +156,7 @@ export default function Home() {
                     <span className={`text-xs ${darkMode ? 'text-cream/50' : 'text-espresso/50'}`}>({product.reviews})</span>
                   </div>
                   <h3 className={`font-serif font-semibold ${darkMode ? 'text-cream' : 'text-espresso'}`}>{product.name}</h3>
-                  <p className="text-caramel font-bold mt-1">${product.price.toFixed(2)}</p>
+                  <p className="text-caramel font-bold mt-1">{formatPrice(product.price)}</p>
                 </div>
               </Link>
             ))}

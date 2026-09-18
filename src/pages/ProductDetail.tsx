@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import { Star, Heart, ShoppingBag, ArrowLeft, Minus, Plus, Truck, RotateCcw, Shield } from 'lucide-react';
+import { formatPrice } from '../utils/currency';
 
 export default function ProductDetail() {
   const { id } = useParams();
@@ -74,7 +75,7 @@ export default function ProductDetail() {
               </div>
 
               {/* Price */}
-              <p className="text-3xl font-bold text-caramel">${product.price.toFixed(2)}</p>
+              <p className="text-3xl font-bold text-caramel">{formatPrice(product.price)}</p>
 
               {/* Roast Level */}
               {product.roastLevel && (
@@ -219,7 +220,7 @@ export default function ProductDetail() {
                     </div>
                     <div className="p-3">
                       <h4 className={`font-serif text-sm font-semibold ${darkMode ? 'text-cream' : 'text-espresso'}`}>{p.name}</h4>
-                      <p className="text-caramel font-bold text-sm mt-1">${p.price.toFixed(2)}</p>
+                      <p className="text-caramel font-bold text-sm mt-1">{formatPrice(p.price)}</p>
                     </div>
                   </Link>
                 ))}
