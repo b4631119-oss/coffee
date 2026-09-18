@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
+import { t } from '../utils/translations';
 import { Menu, X, ShoppingBag, Heart, Moon, Sun, Search, Coffee } from 'lucide-react';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { darkMode, toggleDarkMode, cartCount, wishlist } = useApp();
+  const { darkMode, language, setLanguage, toggleDarkMode, cartCount, wishlist } = useApp();
   const location = useLocation();
 
   const navLinks = [
-    { path: '/', label: 'Home' },
-    { path: '/menu', label: 'Menu' },
-    { path: '/shop', label: 'Shop' },
-    { path: '/reservation', label: 'Reserve a Table' },
-    { path: '/about', label: 'About' },
-    { path: '/contact', label: 'Contact' },
+    { path: '/', label: t(language, 'navHome') },
+    { path: '/menu', label: t(language, 'navMenu') },
+    { path: '/shop', label: t(language, 'navShop') },
+    { path: '/reservation', label: t(language, 'navReserve') },
+    { path: '/about', label: t(language, 'navAbout') },
+    { path: '/contact', label: t(language, 'navContact') },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -53,6 +54,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </Link>
               <button onClick={toggleDarkMode} className="p-2 rounded-full hover:bg-caramel/10 transition-colors">
                 {darkMode ? <Sun className="w-5 h-5 text-caramel" /> : <Moon className="w-5 h-5 text-espresso" />}
+              </button>
+              <button
+                onClick={() => setLanguage(language === 'en' ? 'ru' : 'en')}
+                className={`px-2.5 py-1.5 rounded-full text-xs font-bold border transition-colors ${darkMode ? 'border-dark-surface text-cream hover:border-caramel' : 'border-beige text-espresso hover:border-caramel'}`}
+                aria-label={language === 'en' ? 'Переключить на русский' : 'Switch to English'}
+              >
+                {language === 'en' ? 'RU' : 'EN'}
               </button>
               <Link to="/account" className="relative p-2 rounded-full hover:bg-caramel/10 transition-colors">
                 <Heart className={`w-5 h-5 ${darkMode ? 'text-cream' : 'text-espresso'}`} />
@@ -94,7 +102,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 onClick={() => setMobileMenuOpen(false)}
                 className={`block px-4 py-2 rounded-lg text-sm font-medium transition-colors ${darkMode ? 'text-cream/60 hover:bg-dark-surface' : 'text-espresso/60 hover:bg-beige'}`}
               >
-                Admin Panel
+                {t(language, 'adminPanel')}
               </Link>
             </div>
           </div>
@@ -117,7 +125,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <span className="font-serif text-xl font-bold text-cream">Coffeetoria</span>
               </div>
               <p className="text-sm leading-relaxed text-cream/60">
-                Freshly roasted, lovingly brewed. Your neighborhood coffee sanctuary since 2018.
+                {t(language, 'footerDesc')}
               </p>
               <div className="flex gap-4">
                 <a href="#" className="w-8 h-8 rounded-full bg-cream/10 flex items-center justify-center hover:bg-caramel transition-colors">
@@ -134,43 +142,43 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
             {/* Quick Links */}
             <div>
-              <h4 className="font-serif text-lg font-semibold text-cream mb-4">Quick Links</h4>
+              <h4 className="font-serif text-lg font-semibold text-cream mb-4">{t(language, 'footerQuickLinks')}</h4>
               <ul className="space-y-2 text-sm">
-                <li><Link to="/menu" className="hover:text-caramel transition-colors">Our Menu</Link></li>
-                <li><Link to="/shop" className="hover:text-caramel transition-colors">Online Shop</Link></li>
-                <li><Link to="/reservation" className="hover:text-caramel transition-colors">Reserve a Table</Link></li>
-                <li><Link to="/about" className="hover:text-caramel transition-colors">About Us</Link></li>
-                <li><Link to="/contact" className="hover:text-caramel transition-colors">Contact</Link></li>
+                <li><Link to="/menu" className="hover:text-caramel transition-colors">{t(language, 'navMenu')}</Link></li>
+                <li><Link to="/shop" className="hover:text-caramel transition-colors">{t(language, 'navShop')}</Link></li>
+                <li><Link to="/reservation" className="hover:text-caramel transition-colors">{t(language, 'navReserve')}</Link></li>
+                <li><Link to="/about" className="hover:text-caramel transition-colors">{t(language, 'navAbout')}</Link></li>
+                <li><Link to="/contact" className="hover:text-caramel transition-colors">{t(language, 'navContact')}</Link></li>
               </ul>
             </div>
 
             {/* Hours */}
             <div>
-              <h4 className="font-serif text-lg font-semibold text-cream mb-4">Opening Hours</h4>
+              <h4 className="font-serif text-lg font-semibold text-cream mb-4">{t(language, 'footerHours')}</h4>
               <ul className="space-y-2 text-sm">
-                <li className="flex justify-between"><span>Mon - Fri</span><span>6:30 AM - 9:00 PM</span></li>
-                <li className="flex justify-between"><span>Saturday</span><span>7:00 AM - 10:00 PM</span></li>
-                <li className="flex justify-between"><span>Sunday</span><span>8:00 AM - 8:00 PM</span></li>
+                <li className="flex justify-between"><span>{t(language, 'footerMonFri')}</span><span>6:30 AM - 9:00 PM</span></li>
+                <li className="flex justify-between"><span>{t(language, 'footerSaturday')}</span><span>7:00 AM - 10:00 PM</span></li>
+                <li className="flex justify-between"><span>{t(language, 'footerSunday')}</span><span>8:00 AM - 8:00 PM</span></li>
               </ul>
             </div>
 
             {/* Contact */}
             <div>
-              <h4 className="font-serif text-lg font-semibold text-cream mb-4">Visit Us</h4>
+              <h4 className="font-serif text-lg font-semibold text-cream mb-4">{t(language, 'footerVisitUs')}</h4>
               <ul className="space-y-2 text-sm">
                 <li>osh </li>
                 <li> Osh, Kyrgyzstan 723500</li>
                 <li className="pt-2">hello@coffetoria.com</li>
-                <li>(555) 99-99-99</li>
+                <li>(0555) 99-99-99</li>
               </ul>
             </div>
           </div>
 
           <div className="border-t border-cream/10 mt-10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-cream/50">
-            <p>© 2026 Coffeetoria. All rights reserved.</p>
+            <p>{t(language, 'footerRights')}</p>
             <div className="flex gap-4">
-              <Link to="/privacy" className="hover:text-caramel transition-colors">Privacy Policy</Link>
-              <Link to="/returns" className="hover:text-caramel transition-colors">Returns & Refunds</Link>
+              <Link to="/privacy" className="hover:text-caramel transition-colors">{t(language, 'footerPrivacy')}</Link>
+              <Link to="/returns" className="hover:text-caramel transition-colors">{t(language, 'footerReturns')}</Link>
             </div>
           </div>
         </div>
