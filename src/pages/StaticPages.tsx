@@ -1,16 +1,17 @@
 import React from 'react';
 import { useApp } from '../context/AppContext';
 import { Shield, RotateCcw } from 'lucide-react';
+import { t } from '../utils/translations';
 
 export function Privacy() {
-  const { darkMode } = useApp();
+  const { darkMode, language } = useApp();
 
   return (
     <div className={`min-h-screen ${darkMode ? 'bg-dark-bg' : 'bg-cream'}`}>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
         <div className="flex items-center gap-3 mb-8">
           <Shield className="w-8 h-8 text-caramel" />
-          <h1 className={`font-serif text-3xl lg:text-4xl font-bold ${darkMode ? 'text-cream' : 'text-espresso'}`}>Privacy Policy</h1>
+          <h1 className={`font-serif text-3xl lg:text-4xl font-bold ${darkMode ? 'text-cream' : 'text-espresso'}`}>{t(language, 'staticPrivacyTitle')}</h1>
         </div>
         <div className={`prose max-w-none ${darkMode ? 'text-cream/70' : 'text-espresso/70'}`}>
           <p className="text-sm mb-8">Last updated: December 2026</p>
@@ -48,7 +49,7 @@ export function Privacy() {
 
             <section>
               <h2 className={`font-serif text-xl font-semibold mb-3 ${darkMode ? 'text-cream' : 'text-espresso'}`}>7. Contact Us</h2>
-              <p>If you have questions about this Privacy Policy, please contact us at:<br/>Email: privacy@brewhaven.com<br/>Phone: (555) 99-99-99<br/>Address: osh ,  Osh, Kyrgyzstan 723500</p>
+              <p>If you have questions about this Privacy Policy, please contact us at:<br/>Email: privacy@brewhaven.com<br/>Phone: (0555) 99-99-99<br/>Address: osh ,  Osh, Kyrgyzstan 723500</p>
             </section>
           </div>
         </div>
@@ -58,14 +59,14 @@ export function Privacy() {
 }
 
 export function Returns() {
-  const { darkMode } = useApp();
+  const { darkMode, language } = useApp();
 
   return (
     <div className={`min-h-screen ${darkMode ? 'bg-dark-bg' : 'bg-cream'}`}>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
         <div className="flex items-center gap-3 mb-8">
           <RotateCcw className="w-8 h-8 text-caramel" />
-          <h1 className={`font-serif text-3xl lg:text-4xl font-bold ${darkMode ? 'text-cream' : 'text-espresso'}`}>Returns & Refunds</h1>
+          <h1 className={`font-serif text-3xl lg:text-4xl font-bold ${darkMode ? 'text-cream' : 'text-espresso'}`}>{t(language, 'staticReturnsTitle')}</h1>
         </div>
         <div className={`prose max-w-none ${darkMode ? 'text-cream/70' : 'text-espresso/70'}`}>
           <p className="text-sm mb-8">Last updated: December 2026</p>
@@ -114,7 +115,7 @@ export function Returns() {
 
             <section>
               <h2 className={`font-serif text-xl font-semibold mb-3 ${darkMode ? 'text-cream' : 'text-espresso'}`}>Contact Us</h2>
-              <p>Questions about returns? Reach out to us:<br/>Email: returns@brewhaven.com<br/>Phone: (555) 99-99-99</p>
+              <p>Questions about returns? Reach out to us:<br/>Email: returns@brewhaven.com<br/>Phone: (0555) 99-99-99</p>
             </section>
           </div>
         </div>
