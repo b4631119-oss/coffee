@@ -7,7 +7,7 @@ export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [showChat, setShowChat] = useState(false);
   const [chatMessages, setChatMessages] = useState([
-    { from: 'bot', text: "Hi there! 👋 Welcome to Brew Haven. How can I help you today?" }
+    { from: 'bot', text: "Hi there! 👋 Welcome to Coffeetoria. How can I help you today?" }
   ]);
   const [chatInput, setChatInput] = useState('');
 

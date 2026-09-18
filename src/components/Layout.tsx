@@ -28,7 +28,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2 group">
               <Coffee className="w-8 h-8 text-caramel group-hover:rotate-12 transition-transform" />
-              <span className="font-serif text-xl lg:text-2xl font-bold text-espresso dark:text-cream">Brew Haven</span>
+              <span className="font-serif text-xl lg:text-2xl font-bold text-espresso dark:text-cream">Coffeetoria</span>
             </Link>
 
             {/* Desktop Nav */}
@@ -114,7 +114,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <div className="space-y-4">
               <div className="flex items-center gap-2">
                 <Coffee className="w-7 h-7 text-caramel" />
-                <span className="font-serif text-xl font-bold text-cream">Brew Haven</span>
+                <span className="font-serif text-xl font-bold text-cream">Coffeetoria</span>
               </div>
               <p className="text-sm leading-relaxed text-cream/60">
                 Freshly roasted, lovingly brewed. Your neighborhood coffee sanctuary since 2018.
@@ -167,7 +167,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
 
           <div className="border-t border-cream/10 mt-10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-cream/50">
-            <p>© 2024 Brew Haven. All rights reserved.</p>
+            <p>© 2024 Coffeetoria. All rights reserved.</p>
             <div className="flex gap-4">
               <Link to="/privacy" className="hover:text-caramel transition-colors">Privacy Policy</Link>
               <Link to="/returns" className="hover:text-caramel transition-colors">Returns & Refunds</Link>

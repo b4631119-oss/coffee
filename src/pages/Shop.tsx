@@ -31,7 +31,7 @@ export default function ShopPage() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="font-serif text-4xl lg:text-6xl font-bold text-cream mb-4">Online Shop</h1>
           <p className="text-cream/70 text-lg max-w-2xl mx-auto">
-            Take the Brew Haven experience home. Premium beans, artisan merchandise, and more — delivered to your door.
+            Take the Coffeetoria experience home. Premium beans, artisan merchandise, and more — delivered to your door.
           </p>
         </div>
       </section>

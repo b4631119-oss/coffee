@@ -17,7 +17,7 @@ export default function About() {
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="font-serif text-4xl lg:text-6xl font-bold text-cream mb-6">Our Story</h1>
           <p className="text-cream/80 text-lg lg:text-xl leading-relaxed">
-            Born from a passion for exceptional coffee and a desire to create a space where community thrives, Brew Haven has been serving happiness one cup at a time since 2018.
+            Born from a passion for exceptional coffee and a desire to create a space where community thrives, Coffeetoria has been serving happiness one cup at a time since 2018.
           </p>
         </div>
       </section>

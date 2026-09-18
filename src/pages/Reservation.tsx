@@ -54,7 +54,7 @@ export default function Reservation() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="font-serif text-4xl lg:text-6xl font-bold text-cream mb-4">Reserve a Table</h1>
           <p className="text-cream/70 text-lg max-w-2xl mx-auto">
-            Secure your cozy corner at Brew Haven. Whether it's a morning coffee date or an evening catch-up, we've got a spot waiting for you.
+            Secure your cozy corner at Coffeetoria. Whether it's a morning coffee date or an evening catch-up, we've got a spot waiting for you.
           </p>
         </div>
       </section>

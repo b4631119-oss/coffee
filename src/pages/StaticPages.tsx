@@ -73,7 +73,7 @@ export function Returns() {
           <div className="space-y-6">
             <section>
               <h2 className={`font-serif text-xl font-semibold mb-3 ${darkMode ? 'text-cream' : 'text-espresso'}`}>Our Satisfaction Guarantee</h2>
-              <p>At Brew Haven, we stand behind the quality of our products. If you're not completely satisfied with your purchase, we're here to help.</p>
+              <p>At Coffeetoria, we stand behind the quality of our products. If you're not completely satisfied with your purchase, we're here to help.</p>
             </section>
 
             <section>

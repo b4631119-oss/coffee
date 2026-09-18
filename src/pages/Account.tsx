@@ -31,7 +31,7 @@ export default function Account() {
               {isLogin ? 'Welcome Back' : 'Create Account'}
             </h1>
             <p className={`text-sm mt-2 ${darkMode ? 'text-cream/60' : 'text-espresso/60'}`}>
-              {isLogin ? 'Sign in to your Brew Haven account' : 'Join our coffee-loving community'}
+              {isLogin ? 'Sign in to your Coffeetoria account' : 'Join our coffee-loving community'}
             </p>
           </div>
 

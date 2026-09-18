@@ -39,7 +39,7 @@ export default function Home() {
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="max-w-2xl animate-fade-in-up">
-            <p className="text-caramel font-medium text-sm uppercase tracking-wider mb-4">Welcome to Brew Haven</p>
+            <p className="text-caramel font-medium text-sm uppercase tracking-wider mb-4">Welcome to Coffeetoria</p>
             <h1 className="font-serif text-4xl sm:text-5xl lg:text-7xl font-bold text-cream leading-tight mb-6">
               Start Your Morning with the <span className="text-caramel italic">Perfect</span> Roast
             </h1>
@@ -186,7 +186,7 @@ export default function Home() {
                 Where Every Cup Tells a Story
               </h2>
               <p className={`text-lg leading-relaxed mb-6 ${darkMode ? 'text-cream/70' : 'text-espresso/70'}`}>
-                Born from a love of exceptional coffee and genuine connection, Brew Haven has been the heart of our community since 2018. We source our beans from sustainable farms, roast them in-house, and serve every cup with a smile.
+                Born from a love of exceptional coffee and genuine connection, Coffeetoria has been the heart of our community since 2018. We source our beans from sustainable farms, roast them in-house, and serve every cup with a smile.
               </p>
               <p className={`leading-relaxed mb-8 ${darkMode ? 'text-cream/60' : 'text-espresso/60'}`}>
                 Whether you're here for a quick espresso or a long afternoon with a good book, we've created a space that feels like home. Because great coffee isn't just about the beans — it's about the moments they create.
