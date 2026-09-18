@@ -95,17 +95,17 @@ export default function Contact() {
                   <div className="flex items-start gap-3">
                     <MapPin className="w-5 h-5 text-caramel mt-0.5 shrink-0" />
                     <div>
-                      <p className={`font-medium ${darkMode ? 'text-cream' : 'text-espresso'}`}>123 Roast Avenue</p>
-                      <p className={`text-sm ${darkMode ? 'text-cream/60' : 'text-espresso/60'}`}>Portland, OR 97201</p>
+                      <p className={`font-medium ${darkMode ? 'text-cream' : 'text-espresso'}`}>osh </p>
+                      <p className={`text-sm ${darkMode ? 'text-cream/60' : 'text-espresso/60'}`}> Osh, Kyrgyzstan 723500</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
                     <Phone className="w-5 h-5 text-caramel shrink-0" />
-                    <p className={darkMode ? 'text-cream' : 'text-espresso'}>(503) 555-BREW</p>
+                    <p className={darkMode ? 'text-cream' : 'text-espresso'}>(555) 99-99-99</p>
                   </div>
                   <div className="flex items-center gap-3">
                     <Mail className="w-5 h-5 text-caramel shrink-0" />
-                    <p className={darkMode ? 'text-cream' : 'text-espresso'}>hello@brewhaven.com</p>
+                    <p className={darkMode ? 'text-cream' : 'text-espresso'}>hello@coffetoria.com</p>
                   </div>
                   <div className="flex items-start gap-3">
                     <Clock className="w-5 h-5 text-caramel mt-0.5 shrink-0" />
@@ -122,7 +122,7 @@ export default function Contact() {
               <div className={`rounded-2xl overflow-hidden h-48 ${darkMode ? 'bg-dark-card' : 'bg-beige'} shadow-md flex items-center justify-center`}>
                 <div className="text-center">
                   <MapPin className={`w-8 h-8 mx-auto mb-2 ${darkMode ? 'text-cream/30' : 'text-espresso/30'}`} />
-                  <p className={`text-sm ${darkMode ? 'text-cream/40' : 'text-espresso/40'}`}>123 Roast Avenue, Portland</p>
+                  <p className={`text-sm ${darkMode ? 'text-cream/40' : 'text-espresso/40'}`}>osh , Portland</p>
                 </div>
               </div>
 

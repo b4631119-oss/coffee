@@ -140,13 +140,13 @@ export default function Reservation() {
                   <div className="flex items-start gap-3">
                     <MapPin className="w-5 h-5 text-caramel mt-0.5 shrink-0" />
                     <div>
-                      <p className={`font-medium ${darkMode ? 'text-cream' : 'text-espresso'}`}>123 Roast Avenue</p>
-                      <p className={`text-sm ${darkMode ? 'text-cream/60' : 'text-espresso/60'}`}>Portland, OR 97201</p>
+                      <p className={`font-medium ${darkMode ? 'text-cream' : 'text-espresso'}`}>osh </p>
+                      <p className={`text-sm ${darkMode ? 'text-cream/60' : 'text-espresso/60'}`}> Osh, Kyrgyzstan 723500</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
                     <Phone className="w-5 h-5 text-caramel shrink-0" />
-                    <p className={darkMode ? 'text-cream' : 'text-espresso'}>(503) 555-BREW</p>
+                    <p className={darkMode ? 'text-cream' : 'text-espresso'}>(555) 99-99-99</p>
                   </div>
                   <div className="flex items-center gap-3">
                     <Clock className="w-5 h-5 text-caramel shrink-0" />

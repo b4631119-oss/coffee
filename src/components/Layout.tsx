@@ -158,10 +158,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <div>
               <h4 className="font-serif text-lg font-semibold text-cream mb-4">Visit Us</h4>
               <ul className="space-y-2 text-sm">
-                <li>123 Roast Avenue</li>
-                <li>Portland, OR 97201</li>
-                <li className="pt-2">hello@brewhaven.com</li>
-                <li>(503) 555-BREW</li>
+                <li>osh </li>
+                <li> Osh, Kyrgyzstan 723500</li>
+                <li className="pt-2">hello@coffetoria.com</li>
+                <li>(555) 99-99-99</li>
               </ul>
             </div>
           </div>

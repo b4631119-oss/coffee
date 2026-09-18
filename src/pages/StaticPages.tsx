@@ -48,7 +48,7 @@ export function Privacy() {
 
             <section>
               <h2 className={`font-serif text-xl font-semibold mb-3 ${darkMode ? 'text-cream' : 'text-espresso'}`}>7. Contact Us</h2>
-              <p>If you have questions about this Privacy Policy, please contact us at:<br/>Email: privacy@brewhaven.com<br/>Phone: (503) 555-BREW<br/>Address: 123 Roast Avenue, Portland, OR 97201</p>
+              <p>If you have questions about this Privacy Policy, please contact us at:<br/>Email: privacy@brewhaven.com<br/>Phone: (555) 99-99-99<br/>Address: osh ,  Osh, Kyrgyzstan 723500</p>
             </section>
           </div>
         </div>
@@ -114,7 +114,7 @@ export function Returns() {
 
             <section>
               <h2 className={`font-serif text-xl font-semibold mb-3 ${darkMode ? 'text-cream' : 'text-espresso'}`}>Contact Us</h2>
-              <p>Questions about returns? Reach out to us:<br/>Email: returns@brewhaven.com<br/>Phone: (503) 555-BREW</p>
+              <p>Questions about returns? Reach out to us:<br/>Email: returns@brewhaven.com<br/>Phone: (555) 99-99-99</p>
             </section>
           </div>
         </div>
