@@ -17,7 +17,7 @@ import { Privacy, Returns } from './pages/StaticPages';
 function App() {
   return (
     <AppProvider>
-      <Router basename="/Coffee">
+      <Router>
         <Layout>
           <Routes>
             <Route path="/" element={<Home />} />
