@@ -167,7 +167,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
 
           <div className="border-t border-cream/10 mt-10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-cream/50">
-            <p>© 2024 Coffeetoria. All rights reserved.</p>
+            <p>© 2026 Coffeetoria. All rights reserved.</p>
             <div className="flex gap-4">
               <Link to="/privacy" className="hover:text-caramel transition-colors">Privacy Policy</Link>
               <Link to="/returns" className="hover:text-caramel transition-colors">Returns & Refunds</Link>

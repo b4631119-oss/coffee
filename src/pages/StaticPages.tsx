@@ -13,7 +13,7 @@ export function Privacy() {
           <h1 className={`font-serif text-3xl lg:text-4xl font-bold ${darkMode ? 'text-cream' : 'text-espresso'}`}>Privacy Policy</h1>
         </div>
         <div className={`prose max-w-none ${darkMode ? 'text-cream/70' : 'text-espresso/70'}`}>
-          <p className="text-sm mb-8">Last updated: December 2024</p>
+          <p className="text-sm mb-8">Last updated: December 2026</p>
 
           <div className="space-y-6">
             <section>
@@ -68,7 +68,7 @@ export function Returns() {
           <h1 className={`font-serif text-3xl lg:text-4xl font-bold ${darkMode ? 'text-cream' : 'text-espresso'}`}>Returns & Refunds</h1>
         </div>
         <div className={`prose max-w-none ${darkMode ? 'text-cream/70' : 'text-espresso/70'}`}>
-          <p className="text-sm mb-8">Last updated: December 2024</p>
+          <p className="text-sm mb-8">Last updated: December 2026</p>
 
           <div className="space-y-6">
             <section>
