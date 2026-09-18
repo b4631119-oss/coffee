@@ -122,7 +122,7 @@ export default function Contact() {
               <div className={`rounded-2xl overflow-hidden h-48 ${darkMode ? 'bg-dark-card' : 'bg-beige'} shadow-md flex items-center justify-center`}>
                 <div className="text-center">
                   <MapPin className={`w-8 h-8 mx-auto mb-2 ${darkMode ? 'text-cream/30' : 'text-espresso/30'}`} />
-                  <p className={`text-sm ${darkMode ? 'text-cream/40' : 'text-espresso/40'}`}>osh , Portland</p>
+                  <p className={`text-sm ${darkMode ? 'text-cream/40' : 'text-espresso/40'}`}>osh , Kyrgyzstan</p>
                 </div>
               </div>
 
