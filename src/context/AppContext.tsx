@@ -17,11 +17,14 @@ export interface CartItem extends Product {
   cartQuantity: number;
 }
 
+export type Language = 'en' | 'ru';
+
 interface AppContextType {
   products: Product[];
   cart: CartItem[];
   wishlist: Product[];
   darkMode: boolean;
+  language: Language;
   searchQuery: string;
   addProduct: (product: Product) => void;
   updateProduct: (product: Product) => void;
@@ -33,6 +36,7 @@ interface AppContextType {
   addToWishlist: (product: Product) => void;
   removeFromWishlist: (id: string) => void;
   toggleDarkMode: () => void;
+  setLanguage: (language: Language) => void;
   setSearchQuery: (query: string) => void;
   loadSampleProducts: () => void;
   cartTotal: number;
@@ -81,6 +85,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
     return saved ? JSON.parse(saved) : false;
   });
 
+  const [language, setLanguage] = useState<Language>(() => {
+    const saved = localStorage.getItem('brewHaven_language');
+    return saved === 'ru' ? 'ru' : 'en';
+  });
+
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
@@ -103,6 +112,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
       document.documentElement.classList.remove('dark');
     }
   }, [darkMode]);
+
+  useEffect(() => {
+    localStorage.setItem('brewHaven_language', language);
+    document.documentElement.lang = language;
+  }, [language]);
 
   const addProduct = (product: Product) => setProducts(prev => [...prev, product]);
   const updateProduct = (product: Product) => setProducts(prev => prev.map(p => p.id === product.id ? product : p));
@@ -141,11 +155,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   return (
     <AppContext.Provider value={{
-      products, cart, wishlist, darkMode, searchQuery,
+      products, cart, wishlist, darkMode, language, searchQuery,
       addProduct, updateProduct, deleteProduct,
       addToCart, removeFromCart, updateCartQuantity, clearCart,
       addToWishlist, removeFromWishlist,
-      toggleDarkMode, setSearchQuery, loadSampleProducts,
+      toggleDarkMode, setLanguage, setSearchQuery, loadSampleProducts,
       cartTotal, cartCount
     }}>
       {children}
